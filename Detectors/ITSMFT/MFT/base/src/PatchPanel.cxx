@@ -42,13 +42,12 @@ PatchPanel::PatchPanel() //: TNamed(), mPatchPanel(nullptr)
 // PatchPanel::~PatchPanel() = default;
 
 //_____________________________________________________________________________
-TGeoVolumeAssembly* PatchPanel::createPatchPanel()
-{
+TGeoVolumeAssembly *PatchPanel::createPatchPanel() {
 
-  auto* PatchPanelVolume = new TGeoVolumeAssembly("PatchPanelVolume");
+  auto *PatchPanelVolume = new TGeoVolumeAssembly("PatchPanelVolume");
 
-  TGeoMedium* kMedAlu = gGeoManager->GetMedium("MFT_Alu$");
-  TGeoMedium* kMedCu = gGeoManager->GetMedium("MFT_Cu$");
+  TGeoMedium *kMedAlu = gGeoManager->GetMedium("MFT_Alu$");
+  TGeoMedium *kMedCu = gGeoManager->GetMedium("MFT_Cu$");
 
   /////////////////////////////////////   A ////////////////////////////
 
@@ -67,11 +66,11 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t ang_in_scut1 = 180;
   Double_t ang_fin_scut1 = 270;
 
-  TGeoTranslation* tr_discL =
-    new TGeoTranslation("tr_discL", -12.5, -10.4, 0); // left
+  TGeoTranslation *tr_discL =
+      new TGeoTranslation("tr_discL", -12.5, -10.4, 0); // left
   tr_discL->RegisterYourself();
 
-  TGeoTranslation* tr_discR = new TGeoTranslation("tr_discR", 12.5, -10.4, 0);
+  TGeoTranslation *tr_discR = new TGeoTranslation("tr_discR", 12.5, -10.4, 0);
   tr_discR->RegisterYourself();
 
   // seg tub 3  SCUT2 ;)
@@ -85,10 +84,10 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t radin_holeB = 0.;
   Double_t radout_holeB = 0.175; // diameter 3.5 H11
   Double_t high_holeB = 1.5;     ///
-  TGeoTranslation* tr1_holeB = new TGeoTranslation("tr1_holeB", -7.5, -28.8, 0);
+  TGeoTranslation *tr1_holeB = new TGeoTranslation("tr1_holeB", -7.5, -28.8, 0);
   tr1_holeB->RegisterYourself();
 
-  TGeoTranslation* tr2_holeB = new TGeoTranslation("tr2_holeB", 7.5, -28.8, 0);
+  TGeoTranslation *tr2_holeB = new TGeoTranslation("tr2_holeB", 7.5, -28.8, 0);
   tr2_holeB->RegisterYourself();
 
   // box 1 |==|
@@ -102,7 +101,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t z_2box = 2;
 
   /// triangular border right to cut partA and partB
-  TGeoXtru* tria_cut1 = new TGeoXtru(2);
+  TGeoXtru *tria_cut1 = new TGeoXtru(2);
   tria_cut1->SetName("S_TRIA_CUT1");
 
   Double_t x_tria1[6] = {52, 45.6, 45.6, 37.17, 36.77, 52};
@@ -113,7 +112,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   tria_cut1->DefineSection(1, 2.4, 0., 0., 1);
 
   // triangular border left
-  TGeoXtru* tria_cut2 = new TGeoXtru(2);
+  TGeoXtru *tria_cut2 = new TGeoXtru(2);
   tria_cut2->SetName("S_TRIA_CUT2");
 
   Double_t x_tria2[6] = {-52, -45.6, -45.6, -37.17, -38.06, -52};
@@ -128,28 +127,28 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t radout_A1 = 0.223; // dia 0.246
   Double_t high_A1 = 10;      // dz 6
 
-  TGeoTranslation* tr_A1 =
-    new TGeoTranslation("tr_A1", -18.627, -24.278, 0); // A hole
+  TGeoTranslation *tr_A1 =
+      new TGeoTranslation("tr_A1", -18.627, -24.278, 0); // A hole
   tr_A1->RegisterYourself();
 
-  TGeoTranslation* tr_B = new TGeoTranslation("tr_B", 18.627, -24.278, 0);
+  TGeoTranslation *tr_B = new TGeoTranslation("tr_B", 18.627, -24.278, 0);
   tr_B->RegisterYourself();
 
-  TGeoTranslation* tr_II = new TGeoTranslation("tr_II", -25.25, -6.65, 0);
+  TGeoTranslation *tr_II = new TGeoTranslation("tr_II", -25.25, -6.65, 0);
   tr_II->RegisterYourself();
 
   //
-  TGeoTranslation* tr_H = new TGeoTranslation("tr_H", -26.092, -34.042, 0);
+  TGeoTranslation *tr_H = new TGeoTranslation("tr_H", -26.092, -34.042, 0);
   tr_H->RegisterYourself();
 
   // shoulder
-  TGeoXtru* shoulder = new TGeoXtru(2);
+  TGeoXtru *shoulder = new TGeoXtru(2);
   shoulder->SetName("S_shoulder");
 
   /// auto* arms = new TGeoVolumeAssembly("arms");
 
   Double_t x_shoulder[4] = {-13.9, -13.9, 13.8,
-                            13.8};                         // vertices to coincide with hone
+                            13.8}; // vertices to coincide with hone
   Double_t y_shoulder[4] = {-24.4, -26.45, -26.45, -24.4}; //
 
   shoulder->DefinePolygon(4, x_shoulder, y_shoulder);
@@ -157,19 +156,19 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   shoulder->DefineSection(1, 4.8, 0., 0., 1); //
 
   // HANDS
-  TGeoXtru* hand_L = new TGeoXtru(2);
+  TGeoXtru *hand_L = new TGeoXtru(2);
   hand_L->SetName("hand_L"); // S_HANDL
 
-  Double_t x_handL[12] = {-44.5, -35.89, -31.38, -30.53, -30, -30.,
-                          -26.2, -24.98, -24.5, -24.5, -37.17, -45.8};
+  Double_t x_handL[12] = {-44.5, -35.89, -31.38, -30.53, -30,    -30.,
+                          -26.2, -24.98, -24.5,  -24.5,  -37.17, -45.8};
   Double_t y_handL[12] = {-13.42, -7.45, -7.45, -8.03, -8.91, -10.5,
-                          -10.5, -9.76, -9.01, -5.9, -5.9, -11.5};
+                          -10.5,  -9.76, -9.01, -5.9,  -5.9,  -11.5};
   hand_L->DefinePolygon(12, x_handL, y_handL);
   hand_L->DefineSection(0, 0., 0., 0.,
                         1); //(plane,-zplane/ +zplane, x0, y0,(x/y))
   hand_L->DefineSection(1, 4.8, 0., 0., 1);
   ///
-  TGeoXtru* part_handL = new TGeoXtru(2);
+  TGeoXtru *part_handL = new TGeoXtru(2);
   part_handL->SetName("S_PART_HAND_L");
 
   Double_t x_part_HL[4] = {-43.5, -43.5, -45.8, -45.8};
@@ -179,22 +178,22 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
                             1); //(plane,-zplane/ +zplane, x0, y0,(x/y))
   part_handL->DefineSection(1, 4.8, 0., 0., 1);
   //////////////
-  TGeoRotation* rot_y180 = new TGeoRotation("rot_y180", 0, 180, 180);
+  TGeoRotation *rot_y180 = new TGeoRotation("rot_y180", 0, 180, 180);
   rot_y180->RegisterYourself();
   ///// right /////
-  TGeoXtru* hand_R = new TGeoXtru(2);
+  TGeoXtru *hand_R = new TGeoXtru(2);
   hand_R->SetName("hand_R");
 
-  Double_t x_handR[12] = {44.5, 35.89, 31.38, 30.53, 30, 30.,
-                          26.2, 24.98, 24.5, 24.5, 37.17, 45.8};
+  Double_t x_handR[12] = {44.5, 35.89, 31.38, 30.53, 30,    30.,
+                          26.2, 24.98, 24.5,  24.5,  37.17, 45.8};
   Double_t y_handR[12] = {-13.42, -7.45, -7.45, -8.03, -8.91, -10.5,
-                          -10.5, -9.76, -9.01, -5.9, -5.9, -11.5};
+                          -10.5,  -9.76, -9.01, -5.9,  -5.9,  -11.5};
   hand_R->DefinePolygon(12, x_handR, y_handR);
   hand_R->DefineSection(0, 0., 0., 0., 1);
   hand_R->DefineSection(1, 4.8, 0., 0., 1);
   //////////////
 
-  TGeoXtru* part_handR = new TGeoXtru(2);
+  TGeoXtru *part_handR = new TGeoXtru(2);
   part_handR->SetName("part_handR");
 
   Double_t x_part_HR[4] = {43.5, 43.5, 45.8, 45.8};
@@ -210,8 +209,8 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angin_hornL = 230;
   Double_t angfin_hornL = 270;
 
-  TGeoTranslation* tr_hornl =
-    new TGeoTranslation("tr_hornl", -13.8, -17.4, 2.2);
+  TGeoTranslation *tr_hornl =
+      new TGeoTranslation("tr_hornl", -13.8, -17.4, 2.2);
   tr_hornl->RegisterYourself();
 
   Double_t radin_hornR = 7.0;
@@ -220,7 +219,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angin_hornR = 270;
   Double_t angfin_hornR = 310;
 
-  TGeoTranslation* tr_hornR = new TGeoTranslation("tr_hornR", 13.8, -17.4, 2.2);
+  TGeoTranslation *tr_hornR = new TGeoTranslation("tr_hornR", 13.8, -17.4, 2.2);
   tr_hornR->RegisterYourself();
 
   // arm box
@@ -228,17 +227,17 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t y_Abox = 1.5;
   Double_t z_Abox = 4.8;
 
-  TGeoRotation* rot_zp54 = new TGeoRotation("rot2_zp54", 54, 0, 0);
+  TGeoRotation *rot_zp54 = new TGeoRotation("rot2_zp54", 54, 0, 0);
   rot_zp54->RegisterYourself();
-  TGeoCombiTrans* combi_rotzp54 = new TGeoCombiTrans(
-    -22.46, -29.4, 2.3, rot_zp54); // to start in the lamine
+  TGeoCombiTrans *combi_rotzp54 = new TGeoCombiTrans(
+      -22.46, -29.4, 2.3, rot_zp54); // to start in the lamine
   combi_rotzp54->SetName("combi_zp54");
   combi_rotzp54->RegisterYourself();
 
-  TGeoRotation* rot_zn54 = new TGeoRotation("rot2_zn54", -54, 0, 0);
+  TGeoRotation *rot_zn54 = new TGeoRotation("rot2_zn54", -54, 0, 0);
   rot_zn54->RegisterYourself();
-  TGeoCombiTrans* combi_rotzn54 =
-    new TGeoCombiTrans(22.46, -29.4, 2.3, rot_zn54); // y=
+  TGeoCombiTrans *combi_rotzn54 =
+      new TGeoCombiTrans(22.46, -29.4, 2.3, rot_zn54); // y=
   combi_rotzn54->SetName("combi_zn54");
   combi_rotzn54->RegisterYourself();
 
@@ -256,8 +255,8 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angin_cext = 227;
   Double_t angfin_cext = 313;
 
-  TGeoTranslation* tr_cext =
-    new TGeoTranslation("tr_cext", 0, 0, 2.3); // to put over the disc
+  TGeoTranslation *tr_cext =
+      new TGeoTranslation("tr_cext", 0, 0, 2.3); // to put over the disc
   tr_cext->RegisterYourself();
 
   /// kiro_c //seg tub
@@ -288,12 +287,12 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t x_labox = 60.0;
   Double_t y_labox = 30.3;
   Double_t z_labox = 0.305;
-  TGeoTranslation* tr_la =
-    new TGeoTranslation("tr_la", 0, -y_labox / 2 - 9.3, high_disc / 2); //
+  TGeoTranslation *tr_la =
+      new TGeoTranslation("tr_la", 0, -y_labox / 2 - 9.3, high_disc / 2); //
   tr_la->RegisterYourself();
 
-  TGeoTranslation* tr_2la =
-    new TGeoTranslation("tr_2la", 0, -8.1, high_disc / 2); //
+  TGeoTranslation *tr_2la =
+      new TGeoTranslation("tr_2la", 0, -8.1, high_disc / 2); //
   tr_2la->RegisterYourself();
 
   /////box 5   lamin 2
@@ -322,8 +321,8 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angin_slimdisL = 205;
   Double_t angfin_slimdisL = 208.;
 
-  TGeoTranslation* tr_slimL =
-    new TGeoTranslation("tr_slimL", 0, 0, high_slimdisL / 2 - 0.1); //
+  TGeoTranslation *tr_slimL =
+      new TGeoTranslation("tr_slimL", 0, 0, high_slimdisL / 2 - 0.1); //
   tr_slimL->RegisterYourself();
 
   // small section of disc R
@@ -334,7 +333,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angfin_slimdisR = 335.;
 
   // piramide
-  TGeoXtru* pyramid = new TGeoXtru(2);
+  TGeoXtru *pyramid = new TGeoXtru(2);
   pyramid->SetName("pyramid");
 
   Double_t x_pyramid[4] = {-1.2, 1.2, 1.4, -1.4};
@@ -345,7 +344,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   pyramid->DefineSection(1, 4.8, 0., 0., 1);
   ////////////////
 
-  TGeoXtru* tanqL = new TGeoXtru(2);
+  TGeoXtru *tanqL = new TGeoXtru(2);
   tanqL->SetName("tanqL");
 
   Double_t x_tanqL[6] = {-29., -26.78, -25.57, -26.2, -27.6, -27.25};
@@ -355,7 +354,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   tanqL->DefineSection(1, 1.65, 0., 0., 1);
   ////////////////
 
-  TGeoXtru* tanqR = new TGeoXtru(2);
+  TGeoXtru *tanqR = new TGeoXtru(2);
   tanqR->SetName("tanqR");
 
   Double_t x_tanqR[6] = {29., 26.78, 25.57, 26.2, 27.6, 27.25};
@@ -365,7 +364,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   tanqR->DefineSection(1, 1.65, 0., 0., 1);
 
   // eyess L
-  TGeoXtru* frog_eyeL = new TGeoXtru(2);
+  TGeoXtru *frog_eyeL = new TGeoXtru(2);
   frog_eyeL->SetName("frog_eyeL");
 
   Double_t x_frog_eyeL[4] = {-13.33, -10.72, -11.11, -11.89};
@@ -375,7 +374,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   frog_eyeL->DefineSection(1, 1.65, 0., 0., 1);
   ////////////////
   // eyess R
-  TGeoXtru* frog_eyeR = new TGeoXtru(2);
+  TGeoXtru *frog_eyeR = new TGeoXtru(2);
   frog_eyeR->SetName("frog_eyeR");
 
   Double_t x_frog_eyeR[4] = {13.33, 10.72, 11.11, 11.89};
@@ -384,7 +383,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   frog_eyeR->DefineSection(0, 0., 0., 0., 1);
   frog_eyeR->DefineSection(1, 1.65, 0., 0., 1);
 
-  TGeoRotation* rot_A = new TGeoRotation("rot_A", 180, 180, 0);
+  TGeoRotation *rot_A = new TGeoRotation("rot_A", 180, 180, 0);
   rot_A->SetName("rot_A");
   rot_A->RegisterYourself();
 
@@ -395,8 +394,8 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angin_slideL = 226.5;
   Double_t angfin_slideL = 228.8;
 
-  TGeoTranslation* tr_slide =
-    new TGeoTranslation("tr_slide", 0, 0, 4.832); //  2.39
+  TGeoTranslation *tr_slide =
+      new TGeoTranslation("tr_slide", 0, 0, 4.832); //  2.39
   tr_slide->RegisterYourself();
 
   //////////////// new cut border slide
@@ -407,10 +406,10 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angfin_slideR = 313.5;
 
   //////backear
-  TGeoXtru* earL = new TGeoXtru(2);
+  TGeoXtru *earL = new TGeoXtru(2);
   earL->SetName("earL");
 
-  Double_t x_earL[8] = {-44., -47.5, -47.5, -44.61,
+  Double_t x_earL[8] = {-44.,   -47.5,  -47.5,  -44.61,
                         -44.08, -44.08, -43.59, -43.59};
   Double_t y_earL[8] = {-21.39, -21.39, -14.74, -14.74,
                         -15.14, -19.47, -20.08, -20.97}; //
@@ -419,7 +418,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
                       1); //(plane,-zplane/ +zplane, x0, y0,(x/y))
   earL->DefineSection(1, 1.2, 0., 0., 1);
 
-  TGeoXtru* earR = new TGeoXtru(2);
+  TGeoXtru *earR = new TGeoXtru(2);
   earR->SetName("earR");
 
   Double_t x_earR[8] = {44., 47.5, 47.5, 44.61, 44.08, 44.08, 43.59, 43.59};
@@ -444,8 +443,8 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
                   ang_in_scut2, ang_fin_scut2);
 
   // new TGeoTubeSeg("S_ARM", radin_arm, radout_arm, high_arm / 2, angin_arm,
-  // angfin_arm); new TGeoTubeSeg("S_ARM_R", radin_armR, radout_armR, high_armR /
-  // 2, angin_armR, angfin_armR);
+  // angfin_arm); new TGeoTubeSeg("S_ARM_R", radin_armR, radout_armR, high_armR
+  // / 2, angin_armR, angfin_armR);
 
   new TGeoBBox("Abox", x_Abox / 2, y_Abox / 2, z_Abox / 2);
 
@@ -501,24 +500,23 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   //// composite shape for base new
 
   new TGeoCompositeShape(
-    "baseA_Shape_0",
-    "S_DISC -BOX1 -S_TRIA_CUT1 -S_TRIA_CUT2  -BOX2 "
-    "-SEG_1HOLE -S_SCUT1:tr_discL -S_SCUT2:tr_discR  -smile "
-    "-cutlatL - cutlatR ");
+      "baseA_Shape_0", "S_DISC -BOX1 -S_TRIA_CUT1 -S_TRIA_CUT2  -BOX2 "
+                       "-SEG_1HOLE -S_SCUT1:tr_discL -S_SCUT2:tr_discR  -smile "
+                       "-cutlatL - cutlatR ");
 
   new TGeoCompositeShape(
-    "baseA_Shape_1",
-    "S_shoulder  - S_CIRC_AHOLE:tr_H  + S_SEG_HORNL:tr_hornl +  "
-    "S_SEG_HORNR:tr_hornR +Abox:combi_zp54 +Abox:combi_zn54 +pyramid "
-    " ");
+      "baseA_Shape_1",
+      "S_shoulder  - S_CIRC_AHOLE:tr_H  + S_SEG_HORNL:tr_hornl +  "
+      "S_SEG_HORNR:tr_hornR +Abox:combi_zp54 +Abox:combi_zn54 +pyramid "
+      " ");
 
   new TGeoCompositeShape(
-    "baseA_Shape_2",
-    " S_PART_HAND_L +hand_L +hand_R +part_handR  -S_CIRC_AHOLE:tr_B "
-    "- S_CIRC_AHOLE:tr_II -S_CIRC_AHOLE:tr_A1 +c_ext:tr_cext  "
-    "+kiroc:tr_cext +slimdisL:tr_slimL +slimdisR:tr_slimL + tanqL "
-    "+tanqR +frog_eyeL +frog_eyeR - s_slideL:tr_slide - "
-    "s_slideR:tr_slide");
+      "baseA_Shape_2",
+      " S_PART_HAND_L +hand_L +hand_R +part_handR  -S_CIRC_AHOLE:tr_B "
+      "- S_CIRC_AHOLE:tr_II -S_CIRC_AHOLE:tr_A1 +c_ext:tr_cext  "
+      "+kiroc:tr_cext +slimdisL:tr_slimL +slimdisR:tr_slimL + tanqL "
+      "+tanqR +frog_eyeL +frog_eyeR - s_slideL:tr_slide - "
+      "s_slideR:tr_slide");
 
   new TGeoCompositeShape("baseA_Shape_3",
                          " (baseA_Shape_0  + baseA_Shape_2 - earL - "
@@ -535,7 +533,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angfin_discB = 360;
 
   /// central cut
-  TGeoXtru* central_cut = new TGeoXtru(2);
+  TGeoXtru *central_cut = new TGeoXtru(2);
   central_cut->SetName("central_cut");
   /// M,N,L,O,P,Q
   Double_t x_central[6] = {-24.5, -16.5, 16.5, 24.5, 24.5, -24.5};
@@ -550,12 +548,12 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t y_wibox = 0.5;
   Double_t z_wibox = 0.7;
 
-  TGeoTranslation* tr_wiL = new TGeoTranslation(
-    "tr_wiL", -11.013, -27.5, 0.35 - 0.09); // z_wibox/2 - high_discB/2)
+  TGeoTranslation *tr_wiL = new TGeoTranslation(
+      "tr_wiL", -11.013, -27.5, 0.35 - 0.09); // z_wibox/2 - high_discB/2)
   tr_wiL->RegisterYourself();
 
-  TGeoTranslation* tr_wiR =
-    new TGeoTranslation("tr_wiR", 11.013, -27.5, 0.35 - 0.09);
+  TGeoTranslation *tr_wiR =
+      new TGeoTranslation("tr_wiR", 11.013, -27.5, 0.35 - 0.09);
   tr_wiR->RegisterYourself();
 
   // vertical_ box
@@ -563,41 +561,41 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t y_vbox = 2.1; //
   Double_t z_vbox = 0.7;
 
-  TGeoTranslation* tr_vboxL =
-    new TGeoTranslation("tr_vboxL", -26.55, -12.4, 0.35 - 0.09);
+  TGeoTranslation *tr_vboxL =
+      new TGeoTranslation("tr_vboxL", -26.55, -12.4, 0.35 - 0.09);
   tr_vboxL->RegisterYourself();
 
-  TGeoTranslation* tr_vboxR =
-    new TGeoTranslation("tr_vboxR", 26.55, -12.4, 0.35 - 0.09);
+  TGeoTranslation *tr_vboxR =
+      new TGeoTranslation("tr_vboxR", 26.55, -12.4, 0.35 - 0.09);
   tr_vboxR->RegisterYourself();
 
   // eyebrow
-  TGeoXtru* eyebrowL = new TGeoXtru(2);
+  TGeoXtru *eyebrowL = new TGeoXtru(2);
   eyebrowL->SetName("eyebrowL"); // S_HANDL
 
-  Double_t x_eyebrowL[8] = {-43.45, -42.95, -42.943, -35.806,
-                            -32.566, -32.566, -35.76, -43.45};
+  Double_t x_eyebrowL[8] = {-43.45,  -42.95,  -42.943, -35.806,
+                            -32.566, -32.566, -35.76,  -43.45};
   Double_t y_eyebrowL[8] = {-16.61, -16.61, -12.59, -7.99,
-                            -7.760, -7.26, -7.41, -12.47}; //
+                            -7.760, -7.26,  -7.41,  -12.47}; //
   eyebrowL->DefinePolygon(8, x_eyebrowL, y_eyebrowL);
   eyebrowL->DefineSection(0, -0.09, 0., 0.,
                           1); //(plane,-zplane/ +zplane, x0, y0,(x/y))
   eyebrowL->DefineSection(1, 0.5, 0., 0., 1);
   // eyebrow
-  TGeoXtru* eyebrowR = new TGeoXtru(2);
+  TGeoXtru *eyebrowR = new TGeoXtru(2);
   eyebrowR->SetName("eyebrowR");
 
-  Double_t x_eyebrowR[8] = {43.45, 42.95, 42.943, 35.806,
-                            32.566, 32.566, 35.76, 43.45};
+  Double_t x_eyebrowR[8] = {43.45,  42.95,  42.943, 35.806,
+                            32.566, 32.566, 35.76,  43.45};
   Double_t y_eyebrowR[8] = {-16.61, -16.61, -12.59, -7.99,
-                            -7.760, -7.26, -7.41, -12.47}; //
+                            -7.760, -7.26,  -7.41,  -12.47}; //
   eyebrowR->DefinePolygon(8, x_eyebrowR, y_eyebrowR);
   eyebrowR->DefineSection(0, -0.09, 0., 0.,
                           1); //(plane,-zplane/ +zplane, x0, y0,(x/y))
   eyebrowR->DefineSection(1, 0.5, 0., 0., 1);
 
   // axe
-  TGeoXtru* axeR = new TGeoXtru(2);
+  TGeoXtru *axeR = new TGeoXtru(2);
   axeR->SetName("axeR");
   Double_t x_axeR[8] = {33.25, 32.26, 29.86, 29.53, 26.52, 23.29, 33.6, 34.35};
   Double_t y_axeR[8] = {-29.35, -30.42, -33.30, -33.10,
@@ -606,10 +604,10 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   axeR->DefineSection(0, -0.09, 0., 0., 1);
   axeR->DefineSection(1, 1.6, 0., 0., 1);
   //
-  TGeoXtru* axeL = new TGeoXtru(2);
+  TGeoXtru *axeL = new TGeoXtru(2);
   axeL->SetName("axeL");
   Double_t x_axeL[8] = {-33.25, -32.26, -29.86, -29.53,
-                        -26.52, -23.29, -33.6, -34.35};
+                        -26.52, -23.29, -33.6,  -34.35};
   Double_t y_axeL[8] = {-29.35, -30.42, -33.30, -33.10,
                         -35.76, -30.98, -27.27, -27.3};
   axeL->DefinePolygon(8, x_axeL, y_axeL);
@@ -618,24 +616,24 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   ////////////////
 
   //////shark
-  TGeoXtru* sharkL = new TGeoXtru(2);
+  TGeoXtru *sharkL = new TGeoXtru(2);
   sharkL->SetName("sharkL");
   Double_t x_sharkL[13] = {-44.64, -43.62, -34.95, -37.79, -37.39,
                            -35.47, -33.86, -27.97, -29.49, -34.92,
                            -37.89, -41.48, -44.68};
   Double_t y_sharkL[13] = {-20.61, -22.89, -31.7, -26.54, -26.05,
-                           -26.98, -28.15, -9.31, -9.31, -24.58,
+                           -26.98, -28.15, -9.31, -9.31,  -24.58,
                            -21.85, -19.13, -17.2};
   sharkL->DefinePolygon(13, x_sharkL, y_sharkL);
   sharkL->DefineSection(0, -0.09, 0., 0., 1);
   sharkL->DefineSection(1, 1.6, 0., 0., 1);
 
-  TGeoXtru* sharkR = new TGeoXtru(2);
+  TGeoXtru *sharkR = new TGeoXtru(2);
   sharkR->SetName("sharkR");
-  Double_t x_sharkR[13] = {44.64, 43.62, 34.9, 37.79, 37.39, 35.47, 33.86,
+  Double_t x_sharkR[13] = {44.64, 43.62, 34.9,  37.79, 37.39, 35.47, 33.86,
                            27.97, 29.49, 34.92, 37.89, 41.48, 44.68};
   Double_t y_sharkR[13] = {-20.61, -22.89, -31.7, -26.54, -26.05,
-                           -26.98, -28.15, -9.31, -9.31, -24.58,
+                           -26.98, -28.15, -9.31, -9.31,  -24.58,
                            -21.85, -19.13, -17.2};
   sharkR->DefinePolygon(13, x_sharkR, y_sharkR);
   sharkR->DefineSection(0, -0.09, 0., 0., 1);
@@ -648,7 +646,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angin_boatL = 208.;
   Double_t angfin_boatL = 228.75; // 48.75
 
-  TGeoTranslation* tr_boatL = new TGeoTranslation("tr_boatL", 0, 0, 0.79);
+  TGeoTranslation *tr_boatL = new TGeoTranslation("tr_boatL", 0, 0, 0.79);
   tr_boatL->RegisterYourself();
 
   // bo
@@ -658,7 +656,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angin_boatR = 311.25;
   Double_t angfin_boatR = 332.;
 
-  TGeoTranslation* tr_boatR = new TGeoTranslation("tr_boatR", 0, 0, 0.79);
+  TGeoTranslation *tr_boatR = new TGeoTranslation("tr_boatR", 0, 0, 0.79);
   tr_boatR->RegisterYourself();
 
   ////////////// \//arc_cut
@@ -668,7 +666,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angin_arcutL = 230.65; // angY 55.65
   Double_t angfin_arcutL = 256.7; // angY 76.5  (256.5)
 
-  TGeoTranslation* tr_arcutL = new TGeoTranslation("tr_arcutL", 0, 0, 0.79);
+  TGeoTranslation *tr_arcutL = new TGeoTranslation("tr_arcutL", 0, 0, 0.79);
   tr_arcutL->RegisterYourself();
 
   ////////////// \//arc_cut
@@ -680,7 +678,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   ///////////////////
 
   /// canine left  to cut
-  TGeoXtru* canine_cutL = new TGeoXtru(2);
+  TGeoXtru *canine_cutL = new TGeoXtru(2);
   canine_cutL->SetName("canine_cutL");
   Double_t x_canine_cutL[6] = {-33.06, -28.51, -26.38,
                                -26.41, -28.61, -31.62}; //
@@ -690,7 +688,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   canine_cutL->DefineSection(1, 2.4, 0., 0., 1);
 
   /// canine right  to cut
-  TGeoXtru* canine_cutR = new TGeoXtru(2);
+  TGeoXtru *canine_cutR = new TGeoXtru(2);
   canine_cutR->SetName("canine_cutR");
   Double_t x_canine_cutR[6] = {33.06, 28.51, 26.38, 26.41, 28.61, 31.62}; //
   Double_t y_canine_cutR[6] = {-38.93, -41.94, -37.85, -36.83, -34.9, -38.67};
@@ -699,7 +697,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   canine_cutR->DefineSection(1, 2.4, 0., 0., 1);
 
   /// triangle dawn left
-  TGeoXtru* triacut_downL = new TGeoXtru(2);
+  TGeoXtru *triacut_downL = new TGeoXtru(2);
   triacut_downL->SetName("triacut_downL");
   Double_t x_triacut_downL[3] = {-16.52, -10.57, -10.57}; //
   Double_t y_triacut_downL[3] = {-50, -50, -44.96};       //
@@ -708,7 +706,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   triacut_downL->DefineSection(1, 2.4, 0., 0., 1);
 
   /// triangle dawn rigth
-  TGeoXtru* triacut_downR = new TGeoXtru(2);
+  TGeoXtru *triacut_downR = new TGeoXtru(2);
   triacut_downR->SetName("triacut_downR");
   Double_t x_triacut_downR[3] = {16.52, 10.57, 10.57}; //
   Double_t y_triacut_downR[3] = {-50, -50, -44.96};    //
@@ -723,11 +721,11 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angin_lip = 258.;  // angY 12
   Double_t angfin_lip = 282.; // angY   282
 
-  TGeoTranslation* tr_lip = new TGeoTranslation("tr_lip", 0, 0, 0.35 - 0.09);
+  TGeoTranslation *tr_lip = new TGeoTranslation("tr_lip", 0, 0, 0.35 - 0.09);
   tr_lip->RegisterYourself();
 
   /// part lip left
-  TGeoXtru* lip_cornerL = new TGeoXtru(2);
+  TGeoXtru *lip_cornerL = new TGeoXtru(2);
   lip_cornerL->SetName("lip_cornerL");
 
   Double_t x_lip_cornerL[7] = {-10.59, -10.02, -9.64, -10.09,
@@ -739,7 +737,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   lip_cornerL->DefineSection(1, 0.6, 0., 0., 1);
 
   /// part lip right
-  TGeoXtru* lip_cornerR = new TGeoXtru(2);
+  TGeoXtru *lip_cornerR = new TGeoXtru(2);
   lip_cornerR->SetName("lip_cornerR");
 
   Double_t x_lip_cornerR[6] = {10.59, 10.02, 9.64, 10.09, 10.09, 10.59}; //
@@ -749,7 +747,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   lip_cornerR->DefineSection(1, 0.6, 0., 0., 1);
 
   /// tears left
-  TGeoXtru* tear_L = new TGeoXtru(2);
+  TGeoXtru *tear_L = new TGeoXtru(2);
   tear_L->SetName("tear_L");
 
   Double_t x_tear_L[4] = {-24.12, -23.71, -20.16, -20.55}; //
@@ -759,7 +757,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   tear_L->DefineSection(1, 0.6, 0., 0., 1);
 
   /// tears R
-  TGeoXtru* tear_R = new TGeoXtru(2);
+  TGeoXtru *tear_R = new TGeoXtru(2);
   tear_R->SetName("tear_R");
 
   Double_t x_tear_R[4] = {24.12, 23.71, 20.16, 20.55}; //
@@ -769,7 +767,7 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
                         1); //(plane,-zplane/ +zplane, x0, y0,(x/y))
   tear_R->DefineSection(1, 0.6, 0., 0., 1);
 
-  TGeoTranslation* tra_B = new TGeoTranslation("tra_B", 0, 0, -4.7); //-4.8
+  TGeoTranslation *tra_B = new TGeoTranslation("tra_B", 0, 0, -4.7); //-4.8
   tra_B->RegisterYourself();
 
   new TGeoTubeSeg("S_DISCB", radin_discB, radout_discB, high_discB / 2,
@@ -797,28 +795,28 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   //// composite shape for base ----
 
   new TGeoCompositeShape(
-    "baseB_Shape_0",
-    "S_DISCB -BOX1 -S_TRIA_CUT1 -S_TRIA_CUT2 -central_cut - "
-    "S_CIRC_AHOLE:tr_B - arcutL -arcutR - canine_cutL "
-    "-canine_cutR - triacut_downL - triacut_downR");
+      "baseB_Shape_0", "S_DISCB -BOX1 -S_TRIA_CUT1 -S_TRIA_CUT2 -central_cut - "
+                       "S_CIRC_AHOLE:tr_B - arcutL -arcutR - canine_cutL "
+                       "-canine_cutR - triacut_downL - triacut_downR");
 
   new TGeoCompositeShape(
-    "baseB_Shape_1",
-    " nhawi_box:tr_wiL +nhawi_box:tr_wiR + vert_box:tr_vboxL + "
-    "vert_box:tr_vboxR  +eyebrowL +eyebrowR  + axeR + axeL + sharkL + sharkR "
-    "+ boatL:tr_boatL + boatR:tr_boatR + lip:tr_lip + lip_cornerL + "
-    "lip_cornerR + tear_L + tear_R");
+      "baseB_Shape_1",
+      " nhawi_box:tr_wiL +nhawi_box:tr_wiR + vert_box:tr_vboxL + "
+      "vert_box:tr_vboxR  +eyebrowL +eyebrowR  + axeR + axeL + sharkL + sharkR "
+      "+ boatL:tr_boatL + boatR:tr_boatR + lip:tr_lip + lip_cornerL + "
+      "lip_cornerR + tear_L + tear_R");
 
   new TGeoCompositeShape("baseB_Shape_2",
                          " baseB_Shape_0:tra_B + baseB_Shape_1:tra_B");
 
-  auto* patchpanel_Shape = new TGeoCompositeShape(
-    "patchpanel_Shape", "  baseA_Shape_3 + baseB_Shape_2");
+  auto *patchpanel_Shape = new TGeoCompositeShape(
+      "patchpanel_Shape", "  baseA_Shape_3 + baseB_Shape_2");
 
-  auto* patchpanel_Volume =
-    new TGeoVolume("patchpanel_Volume", patchpanel_Shape, kMedAlu);
+  auto *patchpanel_Volume =
+      new TGeoVolume("patchpanel_Volume", patchpanel_Shape, kMedAlu);
 
-  //====== Contents of the patch panel (cables, pipes, cards) coded as plates ======
+  //====== Contents of the patch panel (cables, pipes, cards) coded as plates
+  //======
   Double_t radin_pl0 = 33;   // inner radius
   Double_t radout_pl0 = 45;  // outer radius
   Double_t high_pl0 = 0.15;  // thickness
@@ -863,21 +861,113 @@ TGeoVolumeAssembly* PatchPanel::createPatchPanel()
   Double_t angin_pl6 = 150;
   Double_t angfin_pl6 = 160;
 
-  auto* plate_0 = new TGeoTubeSeg("plate_0", radin_pl0, radout_pl0, high_pl0 / 2, 180. + angin_pl0, 180. + angfin_pl0);
-  auto* plate_1 = new TGeoTubeSeg("plate_1", radin_pl1, radout_pl1, high_pl1 / 2, 180. + angin_pl1, 180. + angfin_pl1);
-  auto* plate_2 = new TGeoTubeSeg("plate_2", radin_pl2, radout_pl2, high_pl2 / 2, 180. + angin_pl2, 180. + angfin_pl2);
-  auto* plate_3 = new TGeoTubeSeg("plate_3", radin_pl3, radout_pl3, high_pl3 / 2, 180. + angin_pl3, 180. + angfin_pl3);
-  auto* plate_4 = new TGeoTubeSeg("plate_4", radin_pl4, radout_pl4, high_pl4 / 2, 180. + angin_pl4, 180. + angfin_pl4);
-  auto* plate_5 = new TGeoTubeSeg("plate_5", radin_pl5, radout_pl5, high_pl5 / 2, 180. + angin_pl5, 180. + angfin_pl5);
-  auto* plate_6 = new TGeoTubeSeg("plate_6", radin_pl6, radout_pl6, high_pl6 / 2, 180. + angin_pl6, 180. + angfin_pl6);
-
-  auto* plate_Shape = new TGeoCompositeShape("plate_Shape", "plate_0 + plate_1 + plate_2 + plate_3 + plate_4 + plate_5 + plate_6");
-  auto* plate_Volume = new TGeoVolume("plate_Volume", plate_Shape, kMedCu);
-  auto* tr_pl = new TGeoTranslation("tr_pl", 0, 0, -2.4);
+  auto *plate_0 =
+      new TGeoTubeSeg("plate_0", radin_pl0, radout_pl0, high_pl0 / 2,
+                      180. + angin_pl0, 180. + angfin_pl0);
+  auto *plate_1 =
+      new TGeoTubeSeg("plate_1", radin_pl1, radout_pl1, high_pl1 / 2,
+                      180. + angin_pl1, 180. + angfin_pl1);
+  auto *plate_2 =
+      new TGeoTubeSeg("plate_2", radin_pl2, radout_pl2, high_pl2 / 2,
+                      180. + angin_pl2, 180. + angfin_pl2);
+  auto *plate_3 =
+      new TGeoTubeSeg("plate_3", radin_pl3, radout_pl3, high_pl3 / 2,
+                      180. + angin_pl3, 180. + angfin_pl3);
+  auto *plate_4 =
+      new TGeoTubeSeg("plate_4", radin_pl4, radout_pl4, high_pl4 / 2,
+                      180. + angin_pl4, 180. + angfin_pl4);
+  auto *plate_5 =
+      new TGeoTubeSeg("plate_5", radin_pl5, radout_pl5, high_pl5 / 2,
+                      180. + angin_pl5, 180. + angfin_pl5);
+  auto *plate_6 =
+      new TGeoTubeSeg("plate_6", radin_pl6, radout_pl6, high_pl6 / 2,
+                      180. + angin_pl6, 180. + angfin_pl6);
+  auto *plate_Shape = new TGeoCompositeShape(
+      "plate_Shape",
+      "plate_0 + plate_1 + plate_2 + plate_3 + plate_4 + plate_5 + plate_6");
+  auto *plate_Volume = new TGeoVolume("plate_Volume", plate_Shape, kMedCu);
+  auto *tr_pl = new TGeoTranslation("tr_pl", 0, 0, -2.4);
   tr_pl->RegisterYourself();
+  plate_Volume->SetLineColor(kGray + 2);
 
-  auto* tr_fin = new TGeoTranslation("tr_fin", 0, 0, -0.2);
+  auto *tr_fin = new TGeoTranslation("tr_fin", 0, 0, -0.2);
   tr_fin->RegisterYourself();
+
+  //====== Connection to the C-Side, along the hadronic absorber
+
+  Double_t xcable = 12.0;  // width
+  Double_t ycable = 0.28;  // thickness
+  Double_t zcable = 20.0;
+  TGeoVolume *v_cable0 = gGeoManager->MakeBox("v_cable0", kMedCu, xcable / 2,
+                                              ycable / 2, zcable / 2);
+  auto *r_cable0 = new TGeoRotation("rotation_cable0", 24., 8., 0.);
+  r_cable0->RegisterYourself();
+  Double_t Xcable = 18.5;
+  Double_t Ycable = -42.5;
+  Double_t Zcable = -(zcable / 2. + 4.);
+  auto *p_cable0 = new TGeoCombiTrans(Xcable, Ycable, Zcable, r_cable0);
+  p_cable0->RegisterYourself();
+  PatchPanelVolume->AddNode(v_cable0, 1, p_cable0);
+
+  TGeoVolume *v_cable1 = gGeoManager->MakeBox("v_cable1", kMedCu, xcable / 2,
+                                              ycable / 2, zcable / 2);
+  auto *r_cable1 = new TGeoRotation("rotation_cable1", -24., 8., 0.);
+  r_cable1->RegisterYourself();
+  Xcable = -18.5;
+  auto *p_cable1 = new TGeoCombiTrans(Xcable, Ycable, Zcable, r_cable1);
+  p_cable1->RegisterYourself();
+  PatchPanelVolume->AddNode(v_cable1, 1, p_cable1);
+
+  zcable = 170.;
+  TGeoVolume *v_cable2 = gGeoManager->MakeBox("v_cable2", kMedCu, xcable / 2,
+                                              ycable / 2, zcable / 2);
+  auto *r_cable2 = new TGeoRotation("rotation_cable2", 24., -5., 0.);
+  r_cable2->RegisterYourself();
+  Xcable = 21.;
+  Ycable = -48.;
+  Zcable = -108.8;
+  auto *p_cable2 = new TGeoCombiTrans(Xcable, Ycable, Zcable, r_cable2);
+  p_cable2->RegisterYourself();
+  PatchPanelVolume->AddNode(v_cable2, 1, p_cable2);
+
+  TGeoVolume *v_cable3 = gGeoManager->MakeBox("v_cable3", kMedCu, xcable / 2,
+                                              ycable / 2, zcable / 2);
+  auto *r_cable3 = new TGeoRotation("rotation_cable3", -24., -5., 0.);
+  r_cable3->RegisterYourself();
+  Xcable = -21.;
+  auto *p_cable3 = new TGeoCombiTrans(Xcable, Ycable, Zcable, r_cable3);
+  p_cable3->RegisterYourself();
+  PatchPanelVolume->AddNode(v_cable3, 1, p_cable3);
+
+  zcable = 170.;
+  TGeoVolume *v_cable4 = gGeoManager->MakeBox("v_cable4", kMedCu, xcable / 2,
+                                              ycable / 2, zcable / 2);
+  auto *r_cable4 = new TGeoRotation("rotation_cable4", 24., -10., 0.);
+  r_cable4->RegisterYourself();
+  Xcable = 30.5;
+  Ycable = -68.5;
+  Zcable = -278.;
+  auto *p_cable4 = new TGeoCombiTrans(Xcable, Ycable, Zcable, r_cable4);
+  p_cable4->RegisterYourself();
+  PatchPanelVolume->AddNode(v_cable4, 1, p_cable4);
+
+  TGeoVolume *v_cable5 = gGeoManager->MakeBox("v_cable5", kMedCu, xcable / 2,
+                                              ycable / 2, zcable / 2);
+  auto *r_cable5 = new TGeoRotation("rotation_cable5", -24., -10., 0.);
+  r_cable5->RegisterYourself();
+  Xcable = -30.5;
+  auto *p_cable5 = new TGeoCombiTrans(Xcable, Ycable, Zcable, r_cable5);
+  p_cable5->RegisterYourself();
+  PatchPanelVolume->AddNode(v_cable5, 1, p_cable5);
+
+  v_cable0->SetLineColor(kGray + 2);
+  v_cable1->SetLineColor(kGray + 2);
+  v_cable2->SetLineColor(kGray + 2);
+  v_cable3->SetLineColor(kGray + 2);
+  v_cable4->SetLineColor(kGray + 2);
+  v_cable5->SetLineColor(kGray + 2);
+
+  //===========================================================
 
   patchpanel_Volume->SetLineColor(kGreen - 9);
   PatchPanelVolume->AddNode(patchpanel_Volume, 1, tr_fin);
